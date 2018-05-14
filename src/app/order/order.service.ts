@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+
 import { ShoppingCartService } from "../restaurant-detail/shopping-cart/shopping-cart.service";
 import { CartItem } from "../restaurant-detail/shopping-cart/cart-item.model";
 import {Http,Headers,RequestOptions} from '@angular/http'
@@ -36,7 +37,10 @@ export class OrderService{
         headers.append('Content-Type','application/json')
         return this.http.post(`${MEAT_API}/orders`,
                                JSON.stringify(order), 
-                            new RequestOptions({headers:headers})).map(response => response.json())
+                            new RequestOptions({headers:headers}))
+                            .map(response => response.json())
+                            .map(order => order.id)
+
 
     }
 }
